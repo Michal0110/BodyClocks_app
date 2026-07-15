@@ -1,0 +1,10 @@
+name: app1
+title:
+username: bodyclocks
+account: bodyclocks
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 17535828
+bundleId:
+url: https://bodyclocks.shinyapps.io/app1/
+version: 1

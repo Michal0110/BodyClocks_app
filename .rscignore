@@ -1,0 +1,23 @@
+# Docker
+Dockerfile
+docker-compose.yaml
+.dockerignore
+
+# Documentation
+README.md
+RESTORE_TREATMENT_TAB.md
+
+# R project / IDE
+bodyclocks.Rproj
+.Rprofile
+
+# Precomputation scripts (not part of the app)
+precompute_curves.R
+precompute_positions.R
+pairwise_similarity_analysis.R
+
+# renv library (shinyapps.io installs packages from renv.lock itself)
+renv/
+
+# rsconnect metadata
+rsconnect/

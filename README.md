@@ -6,14 +6,14 @@ colorTo: indigo
 sdk: docker
 app_port: 7860
 fullWidth: true
-short_description: Explore circadian gene-expression and regulatory networks
+short_description: Explore circadian gene-expression and protein-association networks
 ---
 
 # BodyClocks
 
 BodyClocks is an R Shiny application for exploring circadian transcriptomic datasets. It currently brings together 93 datasets (29 mouse and 64 baboon) processed into a common set of rhythmicity statistics, expression profiles, functional annotations and STRING protein-association networks.
 
-[Launch BodyClocks](https://www.bodyclocks.org) · [Data and analysis pipeline](https://github.com/Michal0110/BodyClocks_data)
+[Launch BodyClocks](https://www.bodyclocks.org) · [Source code](https://github.com/Michal0110/BodyClocks_app) · [Data and analysis pipeline](https://github.com/Michal0110/BodyClocks_data)
 
 ## Main features
 
@@ -67,8 +67,27 @@ App data should be regenerated in `BodyClocks_data`, validated there and then sy
 cd ../BodyClocks_data
 Rscript run_analysis.R --fail-fast
 Rscript -e 'source("R/validation_utils.R"); validate_rds_exists()'
-rsync -a results/shiny_data/ ../BodyClocks/data/
+rsync -a results/shiny_data/ ../BodyClocks_app/data/
+cd ../BodyClocks_app
+Rscript -e 'FORCE_RECOMPUTE <- TRUE; source("precompute_positions.R")'
 ```
+
+After each data synchronisation, `precompute_positions.R` must be run from the
+application repository. It opens a temporary Shiny app in a browser, stabilises
+the STRING networks at both supported confidence thresholds and saves the node
+positions under `data/`. Keep the browser window open until processing finishes.
+`FORCE_RECOMPUTE` refreshes existing positions that `rsync` leaves in place; omit
+it when only positions for newly added networks need to be generated.
+
+Fitted expression curves can also be cached in advance, but this step is optional
+and computationally intensive:
+
+```bash
+Rscript -e 'source("precompute_curves.R")'
+```
+
+Without these curve caches, the application remains fully functional and fits
+selected genes on demand.
 
 ## Repository structure
 
@@ -78,7 +97,13 @@ rsync -a results/shiny_data/ ../BodyClocks/data/
 - `datasets.R` — dataset registry and display metadata.
 - `functions.R` — shared data loaders, plotting and enrichment helpers.
 - `data/` — generated application artifacts; source processing belongs in `BodyClocks_data`.
+- `precompute_positions.R` — required post-synchronisation generation of stable STRING network layouts.
+- `precompute_curves.R` — optional precomputation of fitted expression-curve caches.
 
 ## Citation
 
 If you use BodyClocks in research, please cite the associated publication and the archived software/data release. Full citation details will be added when the article is published.
+
+## License
+
+BodyClocks is released under the [MIT License](LICENSE).

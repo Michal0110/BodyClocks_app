@@ -1,0 +1,24 @@
+cff-version: 1.2.0
+message: "If you use BodyClocks in your research, please cite this software using the metadata below."
+title: "BodyClocks"
+abstract: >-
+  BodyClocks is an R Shiny application for exploring circadian transcriptomic
+  datasets from mouse and baboon, including rhythmicity statistics, temporal
+  expression profiles, functional enrichment, STRING protein-association
+  networks, and dataset comparisons.
+authors:
+  - family-names: "Dudek"
+    given-names: "Michal"
+type: software
+version: 1.0.0
+date-released: 2026-07-15
+repository-code: "https://github.com/Michal0110/BodyClocks_app"
+url: "https://www.bodyclocks.org"
+license: MIT
+keywords:
+  - circadian rhythms
+  - transcriptomics
+  - gene expression
+  - functional enrichment
+  - protein association networks
+  - R Shiny

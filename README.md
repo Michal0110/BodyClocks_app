@@ -11,9 +11,9 @@ short_description: Explore circadian gene-expression and protein-association net
 
 # BodyClocks
 
-BodyClocks is an R Shiny application for exploring circadian transcriptomic datasets. It currently brings together 93 datasets (29 mouse and 64 baboon) processed into a common set of rhythmicity statistics, expression profiles, functional annotations and STRING protein-association networks.
+[BodyClocks](https://www.bodyclocks.org) is an R Shiny application for exploring circadian transcriptomic datasets. It brings together more than 90 mouse and baboon datasets in a consistent format, allowing users to examine rhythmicity, temporal expression profiles, functional enrichment and STRING protein-association networks, and to compare rhythmic transcriptomes between datasets.
 
-[Launch BodyClocks](https://www.bodyclocks.org) · [Source code](https://github.com/Michal0110/BodyClocks_app) · [Data and analysis pipeline](https://github.com/Michal0110/BodyClocks_data)
+This repository contains the application code and deployment-ready data. The companion BodyClocks [data and analysis pipeline](https://github.com/Michal0110/BodyClocks_data) contains the processing workflow that generates these data and reproduces the manuscript analyses.
 
 ## Main features
 

@@ -543,18 +543,26 @@ explorerServer <- function(id,
     })
 
     # Plot button
-    toTitleCase <- function(str) {
+    formatGeneInput <- function(str, species) {
       genes <- strsplit(str, ",")[[1]]
-      genes <- sapply(genes, function(gene) {
-        gene <- trimws(gene)
-        paste(toupper(substring(gene, 1, 1)), tolower(substring(gene, 2)), sep = "")
-      }, USE.NAMES = FALSE)
+      genes <- trimws(genes)
+
+      if (identical(species, "baboon")) {
+        return(toupper(genes))
+      }
+
+      if (identical(species, "mouse")) {
+        return(vapply(genes, function(gene) {
+          paste(toupper(substring(gene, 1, 1)), tolower(substring(gene, 2)), sep = "")
+        }, character(1), USE.NAMES = FALSE))
+      }
+
       genes
     }
     observeEvent(input$plot, {
       if (!nzchar(input$dataset)) return()
       if (!is.null(input$gene) && nchar(input$gene) > 0) {
-        genes <- toTitleCase(tolower(input$gene))
+        genes <- formatGeneInput(input$gene, input$species)
         gene_list(genes)
         updateTextInput(session, "gene", value = paste(genes, collapse = ", "))
       }
